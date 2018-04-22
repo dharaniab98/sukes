@@ -72,11 +72,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_p"
+            <EditText android:id="@+id/input_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Passwo"/>
+                android:inputType="phone"
+                android:hint="MObileNumber"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->
