@@ -20,7 +20,7 @@
             android:title="About" />
         <item
             android:id="@+id/references"
-            android:title="Refferences" />
+            android:title="Referrals" />
         <item
             android:id="@+id/logout"
 

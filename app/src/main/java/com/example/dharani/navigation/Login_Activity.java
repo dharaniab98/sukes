@@ -23,17 +23,19 @@ public class Login_Activity extends Activity {
     EditText emailText;
     EditText passwordText;
 
+    String email;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         loginButton=findViewById(R.id.btn_login);
         signupLink=(TextView)findViewById(R.id.link_signup);
         emailText=(EditText)findViewById(R.id.input_email);
         passwordText=(EditText)findViewById(R.id.input_password);
-
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -75,9 +77,9 @@ public class Login_Activity extends Activity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        final String email = emailText.getText().toString();
+        email = emailText.getText().toString();
         Log.d("email:","is:"+email);
-        final String password = passwordText.getText().toString();
+        password = passwordText.getText().toString();
         Log.d("password:","is:"+password);
 
         // TODO: Implement your own authentication logic here.
@@ -122,6 +124,9 @@ public class Login_Activity extends Activity {
 
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
+        SaveSharedPreference obj = new SaveSharedPreference();
+        obj.setEmail(this,email);
+        obj.setPassword(this,password);
 
         Intent home = new Intent(this,MainActivity.class);
         startActivity(home);
