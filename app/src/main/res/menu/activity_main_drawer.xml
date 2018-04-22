@@ -5,25 +5,24 @@
 
     <group>
 
-    <item  android:checkableBehavior="single"
-        android:title="Main"/>
+
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/profile"
 
             android:title="MYProfile" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/orders"
 
             android:title="Orders" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/about"
 
             android:title="About" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/references"
             android:title="Refferences" />
         <item
-            android:id="@+id/nav_send"
+            android:id="@+id/logout"
 
             android:title="Logout" />
 
