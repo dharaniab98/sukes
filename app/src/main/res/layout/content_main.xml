@@ -27,23 +27,28 @@
             android:orientation="horizontal"
             android:weightSum="3">
             <LinearLayout
+
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_weight="1"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical"
-                android:background="#59ab02">
 
+                android:background="#59ab02">
+                <ImageView
+                    android:id="@+id/electricals"
+                    style="@style/content_main_image"
+                    android:src="@raw/ic_launcher_electricals"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="2dp"
-                    android:text="kitchenServices"
+                    android:text="ElectricalServices"
                     android:textSize="12dp"
                     android:textAlignment="center"
-                    android:textColor="#ffffff"
-                    />
+                    android:textColor="#ffffff" />
 
             </LinearLayout>
             <LinearLayout
@@ -54,11 +59,17 @@
                 android:orientation="vertical"
                 android:background="#59ab02">
 
+                <ImageView
+                    android:id="@+id/plumbers"
+                     style="@style/content_main_image"
+                    android:src="@raw/ic_launcher_plumber"/>
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="2dp"
-                    android:text="kitchenServices"
+                    android:text="PlumberServices"
                     android:textSize="12dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
@@ -73,12 +84,16 @@
                 android:layout_marginTop="5dp"
                 android:orientation="vertical"
                 android:background="#59ab02">
+                <ImageView
+                    android:id="@+id/sanitations"
+                    style="@style/content_main_image"
+                    android:src="@raw/ic_launcher_sanitation"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="2dp"
-                    android:text="kitchenServices"
+                    android:text="SanitationServices"
                     android:textSize="12dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
@@ -99,6 +114,10 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="#59ab02">
+                <ImageView
+                    android:id="@+id/kitchens"
+                    style="@style/content_main_image"
+                    android:src="@raw/ic_launcher_kitchen"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -119,10 +138,11 @@
                 android:background="#59ab02">
 
                 <TextView
+                    android:id="@+id/paids"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="2dp"
-                    android:text="kitchenServices"
+                    android:text="PaidServices"
                     android:textSize="13dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
