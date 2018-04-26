@@ -127,7 +127,7 @@ public class Login_Activity extends Activity {
         SaveSharedPreference obj = new SaveSharedPreference();
         obj.setEmail(this,email);
         obj.setPassword(this,password);
-
+        this.finish();
         Intent home = new Intent(this,MainActivity.class);
         startActivity(home);
     }
