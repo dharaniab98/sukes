@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(SaveSharedPreference.getEmail(MainActivity.this).length() == 0 || SaveSharedPreference.getPassword(MainActivity.this).length() == 0)
+        if(SaveSharedPreference.getPrefStatus(MainActivity.this).length() == 0)
         {
             Intent home = new Intent(this, Login_Activity.class);
             startActivity(home);
@@ -155,8 +155,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.logout) {
             SaveSharedPreference obj = new SaveSharedPreference();
-            obj.setEmail(this,"");
-            obj.setPassword(this,"");
+            obj.setPrefStatus(this,"");
             this.finish();
             Intent i = new Intent(this,Login_Activity.class);
             startActivity(i);

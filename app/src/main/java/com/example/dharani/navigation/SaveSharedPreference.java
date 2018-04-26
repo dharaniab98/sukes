@@ -10,33 +10,23 @@ import android.preference.PreferenceManager;
 
 public class SaveSharedPreference {
 
-    static final String PREF_EMAIL= "email";
-    static final String PREF_PASSWORD= "password";
+
+    static final String PREF_STATUS = "status";
 
     static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
-    public static void setEmail(Context ctx, String email)
+
+    public static void setPrefStatus(Context ctx, String status)
     {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
-        editor.putString(PREF_EMAIL, email);
-        editor.commit();
-    }
-    public static void setPassword(Context ctx, String password)
-    {
-        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
-        editor.putString(PREF_PASSWORD,password);
-        editor.commit();
+        editor.putString(PREF_STATUS,status);
+        editor.apply();
     }
 
-    public static String getEmail(Context ctx)
+    public static String getPrefStatus(Context ctx)
     {
-        return getSharedPreferences(ctx).getString(PREF_EMAIL, "");
-    }
-
-    public static String getPassword(Context ctx)
-    {
-        return getSharedPreferences(ctx).getString(PREF_PASSWORD, "");
+        return getSharedPreferences(ctx).getString(PREF_STATUS, "");
     }
 }

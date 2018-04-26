@@ -12,6 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONObject;
+
 import static android.content.ContentValues.TAG;
 
 public class Login_Activity extends Activity {
@@ -25,6 +32,7 @@ public class Login_Activity extends Activity {
 
     String email;
     String password;
+    String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +90,41 @@ public class Login_Activity extends Activity {
         password = passwordText.getText().toString();
         Log.d("password:","is:"+password);
 
-        // TODO: Implement your own authentication logic here.
-        final String email_from_server = "durga@abc.com";
-        Log.d("email","from servers is:"+email_from_server);
-        final String password_from_server = "abc@abc";
+        String url = "http://www.sukes.in/applogin/"+email+"/"+password;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("loggedInId");
+                            status = obj.getString("result");
+                            Log.d("status is:",""+status);
+                        }catch(Exception e){
+                            Log.e("json parse error:","exception:"+e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                      Log.e("error","connection error in networking "+error);
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        final SaveSharedPreference preference = new SaveSharedPreference();
+        final String status_Pref = preference.getPrefStatus(this);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+
                         // On complete call either onLoginSuccess or onLoginFailed
-                        if(email.equals(email_from_server) && password.equals(password_from_server) ){
+                        if(status.equals("true") || status_Pref.equals("true")){
                             onLoginSuccess();
                         }else
                         {
@@ -116,17 +149,16 @@ public class Login_Activity extends Activity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        // disable going back to the MainActivity
-        moveTaskToBack(true);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        // disable going back to the MainActivity
+//        moveTaskToBack(true);
+//    }
 
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
         SaveSharedPreference obj = new SaveSharedPreference();
-        obj.setEmail(this,email);
-        obj.setPassword(this,password);
+        obj.setPrefStatus(this,status);
         this.finish();
         Intent home = new Intent(this,MainActivity.class);
         startActivity(home);
