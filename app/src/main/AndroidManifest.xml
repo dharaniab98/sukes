@@ -4,16 +4,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/suke_image"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/suke_image"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +21,9 @@
         </activity>
         <activity android:name=".Paid_Services_Activity" />
         <activity android:name=".Profile_Activity" />
-        <activity android:name=".Login_Activity" >
-
-        </activity>
-        <activity android:name=".Signup_Activity"></activity>
+        <activity android:name=".Login_Activity"></activity>
+        <activity android:name=".Signup_Activity" />
+        <activity android:name=".Complaint_Activity"></activity>
     </application>
 
 </manifest>

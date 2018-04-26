@@ -13,10 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    ImageView ElectricalsIntent;
+    ImageView KitchenIntent;
+    ImageView SanitationIntent;
+    ImageView plumberIntent;
+    TextView paidIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +36,55 @@ public class MainActivity extends AppCompatActivity
         }
         setContentView(R.layout.activity_main);
 
+
+        ElectricalsIntent = (ImageView) findViewById(R.id.electricals);
+        ElectricalsIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
+               startActivity(electric);
+            }
+        });
+        KitchenIntent = (ImageView) findViewById(R.id.kitchens);
+        KitchenIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
+                startActivity(electric);
+            }
+        });
+        SanitationIntent = (ImageView) findViewById(R.id.sanitations);
+        SanitationIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
+                startActivity(electric);
+            }
+        });
+
+        plumberIntent = (ImageView) findViewById(R.id.plumbers);
+        plumberIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
+                startActivity(electric);
+            }
+        });
+
+
+        paidIntent = (TextView) findViewById(R.id.paids);
+        paidIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent electric=new Intent(v.getContext(),Paid_Services_Activity.class);
+                startActivity(electric);
+            }
+        });
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -109,5 +166,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
+        /* clicking icons to go to complaint page */
+
+
+
+
     }
 }
