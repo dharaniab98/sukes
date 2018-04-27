@@ -15,6 +15,10 @@
         android:orientation="vertical"
         android:layout_margin="5dp"
         android:elevation="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
         <ViewFlipper
             android:layout_width="match_parent"
             android:layout_height="240dp"
@@ -29,29 +33,40 @@
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:src="@raw/banner_4"
-            android:id="@+id/banner4"/>
+            android:id="@+id/banner4"
+            android:scaleType="centerCrop"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:src="@raw/banner_3"
-                android:id="@+id/banner3"/>
+                android:id="@+id/banner3"
+                android:scaleType="centerCrop"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:src="@raw/bannner_2"
-                android:id="@+id/banner2"/>
+                android:id="@+id/banner2"
+                android:scaleType="centerCrop"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:src="@raw/banner_1"
-                android:id="@+id/banner1"/>
+                android:id="@+id/banner1"
+                android:scaleType="centerCrop"/>
         </ViewFlipper>
-
+        </LinearLayout>
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+                android:layout_weight="1">
             <LinearLayout
 
                 android:layout_width="0dp"
@@ -129,11 +144,12 @@
 
 
         </LinearLayout>
-        <LinearLayout
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+                android:layout_weight="1">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="120dp"
@@ -187,7 +203,21 @@
 
 
         </LinearLayout>
-
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Message"
+                android:textColor="#FF0000"
+                android:textAlignment="center"
+                android:paddingTop="40sp"
+                android:textSize="24sp"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

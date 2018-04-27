@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         if(SaveSharedPreference.getPrefStatus(MainActivity.this).length() == 0)
-        {
+        {   this.finish();
             Intent home = new Intent(this, Login_Activity.class);
             startActivity(home);
         }
