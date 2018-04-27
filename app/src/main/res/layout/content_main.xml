@@ -18,7 +18,7 @@
         <ViewFlipper
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:flipInterval="5000"
+            android:flipInterval="4000"
             android:autoStart="true"
             android:animateFirstView="true"
             android:inAnimation="@anim/fade_in"
