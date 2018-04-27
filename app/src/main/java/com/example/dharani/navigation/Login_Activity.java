@@ -149,11 +149,11 @@ public class Login_Activity extends Activity {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        // disable going back to the MainActivity
-//        moveTaskToBack(true);
-//    }
+    @Override
+    public void onBackPressed() {
+        // disable going back to the MainActivity
+        moveTaskToBack(true);
+    }
 
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
@@ -183,7 +183,7 @@ public class Login_Activity extends Activity {
             emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        if (password.isEmpty()) {
             passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {

@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            //this.finish();
             super.onBackPressed();
         }
     }
@@ -167,8 +168,6 @@ public class MainActivity extends AppCompatActivity
         return true;
 
         /* clicking icons to go to complaint page */
-
-
 
 
     }
