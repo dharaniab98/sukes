@@ -15,11 +15,37 @@
         android:orientation="vertical"
         android:layout_margin="5dp"
         android:elevation="4dp">
+        <ViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:flipInterval="5000"
+            android:autoStart="true"
+            android:animateFirstView="true"
+            android:inAnimation="@anim/fade_in"
+            android:orientation="horizontal"
+            android:outAnimation="@anim/fade_out">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:id="@+id/banner"/>
-
+            android:src="@raw/banner_4"
+            android:id="@+id/banner4"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:src="@raw/banner_3"
+                android:id="@+id/banner3"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:src="@raw/bannner_2"
+                android:id="@+id/banner2"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:src="@raw/banner_1"
+                android:id="@+id/banner1"/>
+        </ViewFlipper>
 
         <LinearLayout
             android:layout_width="match_parent"
