@@ -145,6 +145,7 @@ public class Login_Activity extends Activity {
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
                 this.finish();
+                System.gc();
             }
         }
     }
@@ -160,6 +161,7 @@ public class Login_Activity extends Activity {
         SaveSharedPreference obj = new SaveSharedPreference();
         obj.setPrefStatus(this,status);
         this.finish();
+        System.gc();
         Intent home = new Intent(this,MainActivity.class);
         startActivity(home);
     }

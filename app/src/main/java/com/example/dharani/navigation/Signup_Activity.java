@@ -15,9 +15,12 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Signup_Activity extends AppCompatActivity {
 
@@ -26,22 +29,31 @@ public class Signup_Activity extends AppCompatActivity {
     EditText nameText;
     EditText passwordText;
     EditText emailText;
+    EditText refcode;
     TextView loginLink;
     AppCompatButton signupButton,buttonConfirm;
     EditText phoneText,editTextConfirmOtp;
+
+    String status;
+    String username;
+    String password;
+    String referral;
+    String phone;
+    String email;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+
         loginLink=(TextView)findViewById(R.id.link_login);
         signupButton=(AppCompatButton)findViewById(R.id.btn_signup);
         nameText=(EditText)findViewById(R.id.input_name);
         emailText=(EditText)findViewById(R.id.input_email);
         passwordText=(EditText)findViewById(R.id.input_password);
         phoneText=(EditText)findViewById(R.id.input_phone);
-
+        refcode = (EditText)findViewById(R.id.input_referral);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,19 +87,53 @@ public class Signup_Activity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = nameText.getText().toString();
-        String email = emailText.getText().toString();
-        String password = passwordText.getText().toString();
+        username = nameText.getText().toString();
+        email = emailText.getText().toString();
+        password = passwordText.getText().toString();
+        phone = phoneText.getText().toString();
+        referral = refcode.getText().toString();
+        if(referral.equals("")){
+            referral = "SUK0000";
+        }
 
-        // TODO: Implement your own signup logic here.
+        String url = "http://www.sukes.in/appregister/"+username+"/"+email+"/"+phone+"/"+password+"/"+referral;
+        //signup networking code
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("loggedInId");
+                            status = obj.getString("result");
+                            Log.d("status is:",""+status);
+                        }catch(Exception e){
+                            Log.e("json parse error:","exception:"+e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                      Log.e("error","connection error in networking "+error);
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
+                        if(status.equals("true")){
+                            onSignupSuccess();
+                        }
+                       else {
+                             onSignupFailed();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -97,10 +143,13 @@ public class Signup_Activity extends AppCompatActivity {
     public void onSignupSuccess() {
         signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
-        confirmOtp();
-
-
-        //finish();
+        //confirmOtp();
+        SaveSharedPreference obj = new SaveSharedPreference();
+        obj.setPrefStatus(this,status);
+        this.finish();
+        System.gc();
+        Intent home = new Intent(this,MainActivity.class);
+        startActivity(home);
     }
 
     public void onSignupFailed() {

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
         if(SaveSharedPreference.getPrefStatus(MainActivity.this).length() == 0)
         {   this.finish();
+            System.gc();
             Intent home = new Intent(this, Login_Activity.class);
             startActivity(home);
         }
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
 
                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
+               electric.putExtra("TYPE_SERVICE","Electrical");
                startActivity(electric);
             }
         });
@@ -51,8 +53,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
-                startActivity(electric);
+                Intent kitchen=new Intent(v.getContext(),Complaint_Activity.class);
+                kitchen.putExtra("TYPE_SERVICE","Kitchen");
+                startActivity(kitchen);
             }
         });
         SanitationIntent = (ImageView) findViewById(R.id.sanitations);
@@ -60,8 +63,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
-                startActivity(electric);
+                Intent sanitation=new Intent(v.getContext(),Complaint_Activity.class);
+                sanitation.putExtra("TYPE_SERVICE","Sanitation");
+                startActivity(sanitation);
             }
         });
 
@@ -70,8 +74,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
-                startActivity(electric);
+                Intent plumbing=new Intent(v.getContext(),Complaint_Activity.class);
+                plumbing.putExtra("TYPE_SERVICE","Plumbing");
+                startActivity(plumbing);
             }
         });
 
@@ -81,8 +86,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent electric=new Intent(v.getContext(),Paid_Services_Activity.class);
-                startActivity(electric);
+                Intent paidIntent=new Intent(v.getContext(),Paid_Services_Activity.class);
+                startActivity(paidIntent);
             }
         });
 

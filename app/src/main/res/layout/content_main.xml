@@ -18,10 +18,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_weight="3">
         <ViewFlipper
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="match_parent"
             android:flipInterval="4000"
             android:autoStart="true"
             android:animateFirstView="true"
@@ -34,31 +34,31 @@
             android:layout_height="240dp"
             android:src="@raw/banner_4"
             android:id="@+id/banner4"
-            android:scaleType="centerCrop"/>
+            />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:src="@raw/banner_3"
                 android:id="@+id/banner3"
-                android:scaleType="centerCrop"/>
+                />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:src="@raw/bannner_2"
                 android:id="@+id/banner2"
-                android:scaleType="centerCrop"/>
+                />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:src="@raw/banner_1"
                 android:id="@+id/banner1"
-                android:scaleType="centerCrop"/>
+                />
         </ViewFlipper>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:orientation="vertical">
 
             <LinearLayout
@@ -214,7 +214,7 @@
                 android:text="Message"
                 android:textColor="#FF0000"
                 android:textAlignment="center"
-                android:paddingTop="40sp"
+                android:layout_gravity="center"
                 android:textSize="24sp"
                 />
         </LinearLayout>

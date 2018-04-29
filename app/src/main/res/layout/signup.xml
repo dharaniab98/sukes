@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
 
-                android:hint="Name" />
+                android:hint="UserName" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
@@ -67,6 +67,7 @@
 
 
 
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,6 +78,19 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="Phone"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_referral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Referral code (optional)" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->

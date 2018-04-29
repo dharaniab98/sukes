@@ -16,6 +16,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+            <TextView
+                android:id="@+id/problem_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Problem Type: "
+                android:textColor="#F123"/>
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#FF34"/>
+            </LinearLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -24,7 +45,7 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="name"
+                    android:hint="Name"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -39,7 +60,7 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="enter email"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -54,7 +75,7 @@
                     android:id="@+id/mob_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="mobile number"
+                    android:hint="Phone"
                     android:inputType="phone"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -70,7 +91,7 @@
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="city"
+                    android:hint="City"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -85,7 +106,7 @@
                     android:id="@+id/street"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="street"
+                    android:hint="Street"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -99,7 +120,7 @@
                     android:id="@+id/d_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="door number"
+                    android:hint="DoorNo"
                     android:inputType="number"
                     android:digits="0123456789-/\*"
                     android:maxLines="1"
@@ -116,19 +137,21 @@
                     android:id="@+id/pin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="pin code"
+                    android:hint="Pin Code"
                     android:inputType="number"
                     android:maxLines="1"
                     android:singleLine="true" />
 
+
             </android.support.design.widget.TextInputLayout>
+
 
             <EditText
                 android:id="@+id/feedback"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="top"
-                android:hint="tell us about your problem"
+                android:hint="Tell us about your problem"
                 android:inputType="text|textMultiLine" />
             <Button
                 android:id="@+id/submit"
@@ -136,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="submit"
+                android:text="Submit"
                 android:textStyle="bold" />
 
         </LinearLayout>
