@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.references) {
-
+            Intent intent = new Intent(this,Refferal_Activity.class);
+            startActivity(intent);
         } else if (id == R.id.about) {
 
         } else if (id == R.id.logout) {

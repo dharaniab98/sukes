@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
         android:elevation="4dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,26 +34,30 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
             android:src="@raw/banner_4"
             android:id="@+id/banner4"
             />
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
                 android:src="@raw/banner_3"
                 android:id="@+id/banner3"
                 />
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="match_parent"
                 android:src="@raw/bannner_2"
+                android:scaleType="fitXY"
                 android:id="@+id/banner2"
                 />
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="match_parent"
                 android:src="@raw/banner_1"
+                android:scaleType="fitXY"
                 android:id="@+id/banner1"
                 />
         </ViewFlipper>
@@ -59,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
