@@ -18,6 +18,9 @@ public class Paid_Services_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paid__services_);
 
+        getSupportActionBar().setTitle("Paid Services");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Acting Drivers");
         arrayList.add("Events");

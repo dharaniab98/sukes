@@ -11,6 +11,8 @@ public class Complaint_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint);
+        getSupportActionBar().setTitle("Service Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String service_type = getIntent().getStringExtra("TYPE_SERVICE");
         Log.d("service is:",""+service_type);

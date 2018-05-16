@@ -85,7 +85,7 @@
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:text="INVITE"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:translationZ="2dp" />
 
     <TextView

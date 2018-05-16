@@ -126,7 +126,7 @@ public class Login_Activity extends Activity {
                         // On complete call either onLoginSuccess or onLoginFailed
                         if(status.equals("true") || status_Pref.equals("true")){
                             onLoginSuccess();
-                        }else
+                         }else
                         {
                             onLoginFailed();
                         }

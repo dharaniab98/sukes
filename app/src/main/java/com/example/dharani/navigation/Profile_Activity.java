@@ -9,5 +9,10 @@ public class Profile_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
+        getSupportActionBar().setTitle("My Profile");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 }

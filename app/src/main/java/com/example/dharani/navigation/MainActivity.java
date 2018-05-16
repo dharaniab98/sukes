@@ -1,5 +1,8 @@
 package com.example.dharani.navigation;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     ImageView SanitationIntent;
     ImageView plumberIntent;
     TextView paidIntent;
+    TextView blink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,10 @@ public class MainActivity extends AppCompatActivity
         }
         setContentView(R.layout.activity_main);
 
+       /*  blink=(TextView)findViewById(R.id.register_blink);
+        ObjectAnimator blinkAnim=(ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(),R.animator.blinking_animation);
+        blinkAnim.setTarget(blink);
+        blinkAnim.start();*/
 
         ElectricalsIntent = (ImageView) findViewById(R.id.electricals);
         ElectricalsIntent.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +115,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override
