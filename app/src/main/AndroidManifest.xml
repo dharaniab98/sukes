@@ -15,16 +15,17 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Paid_Services_Activity"
+        <activity
+            android:name=".Paid_Services_Activity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Profile_Activity"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".Profile_Activity"
-            android:parentActivityName=".MainActivity">
-        </activity>
         <activity android:name=".Login_Activity" />
         <activity android:name=".Signup_Activity" />
-        <activity android:name=".Complaint_Activity"
-            android:parentActivityName=".MainActivity">
-        </activity>
+        <activity
+            android:name=".Complaint_Activity"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".SplashScreenActivity"
             android:label="SUKES"
@@ -35,14 +36,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Status_Activity"
-            android:parentActivityName=".MainActivity">
-
-        </activity>
-        <activity android:name=".Refferal_Activity"
-            android:parentActivityName=".MainActivity">
-
-        </activity>
+        <activity
+            android:name=".Status_Activity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".Refferal_Activity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Contact_us"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

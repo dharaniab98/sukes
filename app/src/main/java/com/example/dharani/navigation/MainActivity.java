@@ -172,7 +172,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this,Refferal_Activity.class);
             startActivity(intent);
         } else if (id == R.id.about) {
-
+            Intent intent = new Intent(this,Contact_us.class);
+            startActivity(intent);
         } else if (id == R.id.logout) {
             SaveSharedPreference obj = new SaveSharedPreference();
             obj.setPrefStatus(this,"");

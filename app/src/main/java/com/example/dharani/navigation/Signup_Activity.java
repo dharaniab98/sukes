@@ -137,7 +137,7 @@ public class Signup_Activity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 3000);
-    }
+    } 
 
 
     public void onSignupSuccess() {
