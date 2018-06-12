@@ -20,12 +20,12 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Profile_Activity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Login_Activity" />
         <activity android:name=".Signup_Activity" />
         <activity
             android:name=".Complaint_Activity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:label="SUKES"
@@ -38,12 +38,14 @@
         </activity>
         <activity
             android:name=".Status_Activity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Refferal_Activity"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".Contact_us"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Contact_us"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".PayRegister_Activity"></activity>
     </application>
 
 </manifest>

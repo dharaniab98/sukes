@@ -145,7 +145,7 @@ public class Signup_Activity extends AppCompatActivity {
         setResult(RESULT_OK, null);
         //confirmOtp();
         SaveSharedPreference obj = new SaveSharedPreference();
-        obj.setPrefStatus(this,status);
+        obj.setPrefStatus(this,status,"");
         this.finish();
         System.gc();
         Intent home = new Intent(this,MainActivity.class);

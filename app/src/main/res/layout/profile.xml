@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.dharani.navigation.Profile_Activity"
 
-    android:layout_width="match_parent"
+android:layout_width="match_parent"
+    android:orientation="vertical"
+
     android:layout_height="match_parent">
 
+
+    <!--<android.support.v7.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/profiletoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#feaf"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.v7.design.widget.AppBarLayout>*/-->
+
+  <!--  <SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">-->
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
-                android:text="Dharani Kumar"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -132,4 +161,14 @@
 
         </LinearLayout>
     </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/butt"
+        android:text="REFRESH"
+        android:background="#f0f0f0"
+        android:layout_gravity="bottom"/>
+
+   <!-- </SwipeRefreshLayout>-->
+</LinearLayout>

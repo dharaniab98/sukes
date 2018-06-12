@@ -3,10 +3,14 @@ package com.example.dharani.navigation;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +25,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity
     ImageView plumberIntent;
     TextView paidIntent;
     TextView blink;
+    public  ViewFlipper animation_flip;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +55,39 @@ public class MainActivity extends AppCompatActivity
         blinkAnim.setTarget(blink);
         blinkAnim.start();*/
 
-        ElectricalsIntent = (ImageView) findViewById(R.id.electricals);
+
+
+       /*To stop the view flipper animations   when we touch the images*/
+
+
+               animation_flip = (ViewFlipper)findViewById(R.id.view_anim);
+             /*  animation_flip.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+
+                   }
+               });*/
+       /*animation_flip.setOnTouchListener(new View.OnTouchListener() {
+
+                                                @Override
+                                                public boolean onTouch(View v, MotionEvent event) {
+                                                 switch(event.getAction()){
+                                                     case MotionEvent.ACTION_DOWN:
+                                                         animation_flip.stopFlipping();
+                                                         break;
+                                                     case MotionEvent.ACTION_UP:
+                                                         animation_flip.startFlipping();
+                                                         break;
+                                                 }
+                                                    return true;
+                                                }
+
+
+
+                                            });*/
+
+
+                  ElectricalsIntent = (ImageView) findViewById(R.id.electricals);
         ElectricalsIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +169,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -152,6 +190,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -176,7 +215,13 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.logout) {
             SaveSharedPreference obj = new SaveSharedPreference();
-            obj.setPrefStatus(this,"");
+            obj.setPrefStatus(this,"","");
+            //obj.setPrefStatus(this,"");
+            SharedPreferences profileSharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor=profileSharedPreferences.edit();
+            editor.putString("spemail","");
+            editor.putString("spphno","");
+            editor.apply();
             this.finish();
             Intent i = new Intent(this,Login_Activity.class);
             startActivity(i);
@@ -186,6 +231,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
 
         /* clicking icons to go to complaint page */
 

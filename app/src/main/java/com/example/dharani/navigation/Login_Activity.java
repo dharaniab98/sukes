@@ -2,7 +2,9 @@ package com.example.dharani.navigation;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -33,7 +35,10 @@ public class Login_Activity extends Activity {
     String email;
     String password;
     String status;
-
+    String pemail;
+    String pphno;
+    String userid;
+     String user_Pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +80,7 @@ public class Login_Activity extends Activity {
         if (!validate()) {
             onLoginFailed();
             return;
-        }
+         }
 
         loginButton.setEnabled(false);
 
@@ -100,6 +105,7 @@ public class Login_Activity extends Activity {
                         try {
                             JSONObject obj = response.getJSONObject("loggedInId");
                             status = obj.getString("result");
+                            userid=obj.getString("userId");
                             Log.d("status is:",""+status);
                         }catch(Exception e){
                             Log.e("json parse error:","exception:"+e);
@@ -118,13 +124,16 @@ public class Login_Activity extends Activity {
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         final SaveSharedPreference preference = new SaveSharedPreference();
         final String status_Pref = preference.getPrefStatus(this);
+              user_Pref = preference.getPrefUserid(this);
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-
+                        user_Pref=userid;
                         // On complete call either onLoginSuccess or onLoginFailed
-                        if(status.equals("true") || status_Pref.equals("true")){
+                        if(status.equals("true")){ //|| status_Pref.equals("true")){
+                            storeProfile();
                             onLoginSuccess();
                          }else
                         {
@@ -159,7 +168,9 @@ public class Login_Activity extends Activity {
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
         SaveSharedPreference obj = new SaveSharedPreference();
-        obj.setPrefStatus(this,status);
+        obj.setPrefStatus(this,status,userid);
+
+      //  obj.setPrefStatus(this,userid);
         this.finish();
         System.gc();
         Intent home = new Intent(this,MainActivity.class);
@@ -193,5 +204,51 @@ public class Login_Activity extends Activity {
         }
 
         return valid;
+    }
+    public void storeProfile(){
+        String url = "http://www.sukes.in/appprofile/"+user_Pref;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("loggedInId");
+                           pemail= obj.getString("email_id");
+                            Log.d("status is:",""+email);
+                           pphno= obj.getString("phone_no");
+                        }catch(Exception e){
+                            Log.e("json parse error:","exception:"+e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error","connection error in networking "+error);
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        // final SaveSharedPreference preference = new SaveSharedPreference();
+        // final String status_Pref = preference.getPrefStatus(this);
+
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                SharedPreferences profileSharedPreferences=getSharedPreferences("MyData",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=profileSharedPreferences.edit();
+                editor.putString("spemail",pemail.toString());
+                editor.putString("spphno",pphno.toString());
+                editor.apply();
+
+                    }
+                }, 3000);
+
+
     }
 }
