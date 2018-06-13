@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     ImageView SanitationIntent;
     ImageView plumberIntent;
     TextView paidIntent;
+    TextView registerIntent;
     TextView blink;
     public  ViewFlipper animation_flip;
     @SuppressLint("ClickableViewAccessibility")
@@ -137,6 +138,15 @@ public class MainActivity extends AppCompatActivity
 
                 Intent paidIntent=new Intent(v.getContext(),Paid_Services_Activity.class);
                 startActivity(paidIntent);
+            }
+        });
+        registerIntent = (TextView) findViewById(R.id.register_blink);
+        registerIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent regIntent=new Intent(v.getContext(),Register_Benefits_Activity.class);
+                startActivity(regIntent);
             }
         });
 

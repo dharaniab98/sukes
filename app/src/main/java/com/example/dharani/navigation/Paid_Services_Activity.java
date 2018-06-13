@@ -22,6 +22,10 @@ public class Paid_Services_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Electrical Serices");
+        arrayList.add("Plumber Services");
+        arrayList.add("Kitchen Drivers");
+        arrayList.add("Sanitation Drivers");
         arrayList.add("Acting Drivers");
         arrayList.add("Events");
         arrayList.add("CC Camera Services");

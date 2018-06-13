@@ -20,7 +20,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Profile_Activity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".Login_Activity" />
         <activity android:name=".Signup_Activity" />
         <activity
@@ -45,7 +45,10 @@
         <activity
             android:name=".Contact_us"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".PayRegister_Activity"></activity>
+        <activity android:name=".PayRegister_Activity" />
+        <activity android:name=".Pay_Register_Profile_Activity" />
+        <activity android:name=".Register_Benefits_Activity" />
+        <activity android:name=".Order_List_Activity"></activity>
     </application>
 
 </manifest>
