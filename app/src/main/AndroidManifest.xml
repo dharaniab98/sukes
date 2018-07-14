@@ -21,8 +21,10 @@
         <activity
             android:name=".Profile_Activity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Login_Activity" />
-        <activity android:name=".Signup_Activity" />
+        <activity android:name=".Login_Activity"
+            android:label="Login" />
+        <activity android:name=".Signup_Activity"
+            android:parentActivityName=".Login_Activity"/>
         <activity
             android:name=".Complaint_Activity"
             android:parentActivityName=".MainActivity" />

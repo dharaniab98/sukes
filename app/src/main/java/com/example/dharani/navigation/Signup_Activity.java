@@ -40,12 +40,23 @@ public class Signup_Activity extends AppCompatActivity {
     String referral;
     String phone;
     String email;
+    String otp;
+    String user_id;
+    String otp_status;
+    int otp_regcheck;
+    String otp_userid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
 
         loginLink=(TextView)findViewById(R.id.link_login);
         signupButton=(AppCompatButton)findViewById(R.id.btn_signup);
@@ -107,6 +118,7 @@ public class Signup_Activity extends AppCompatActivity {
                             JSONObject obj = response.getJSONObject("loggedInId");
                             status = obj.getString("result");
                             Log.d("status is:",""+status);
+                            user_id = obj.getString("userId");
                         }catch(Exception e){
                             Log.e("json parse error:","exception:"+e);
                         }
@@ -129,7 +141,7 @@ public class Signup_Activity extends AppCompatActivity {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
                         if(status.equals("true")){
-                            onSignupSuccess();
+                            confirmOtp();
                         }
                        else {
                              onSignupFailed();
@@ -145,7 +157,7 @@ public class Signup_Activity extends AppCompatActivity {
         setResult(RESULT_OK, null);
         //confirmOtp();
         SaveSharedPreference obj = new SaveSharedPreference();
-        obj.setPrefStatus(this,status,"");
+        obj.setPrefStatus(this,status,"","","");
         this.finish();
         System.gc();
         Intent home = new Intent(this,MainActivity.class);
@@ -229,13 +241,63 @@ public class Signup_Activity extends AppCompatActivity {
 
                 //Displaying a progressbar
                 final ProgressDialog loading = ProgressDialog.show(Signup_Activity.this, "Authenticating", "Please wait while we check the entered code", false, false);
-                Intent home = new Intent(Signup_Activity.this,MainActivity.class);
-                startActivity(home);
 
                 //Getting the user entered otp from edittext
-                final String otp = editTextConfirmOtp.getText().toString().trim();
+                otp = editTextConfirmOtp.getText().toString().trim();
+
+
+                Log.d("otp is :",""+otp);
+
+
+        //Network request
+                String url = "http://sukes.in/appregconfirm/"+user_id+"/"+otp;
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("loggedInId");
+                            otp_status = obj.getString("result");
+                            otp_regcheck = obj.getInt("regcheck");
+                            Log.d("status_otp is :",""+otp_status);
+                            Log.d("otp reg check is:",""+otp_regcheck);
+
+                        }catch(Exception e){
+                            Log.e("json parse error:","exception:"+e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error","connection error in networking "+error);
+
+                    }
+                });
+
+                MySingleton.getInstance(getBaseContext()).addToRequestQueue(jsonObjectRequest);
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        // On complete call either onLoginSuccess or onLoginFailed
+                        if(otp_regcheck == 1){ //|| status_Pref.equals("true"))
+
+                            onSignupSuccess();
+                        }else
+                        {
+                            Toast.makeText(getBaseContext(),"Re-enter OTP",Toast.LENGTH_SHORT).show();
+                            confirmOtp();
+                        }
+
+                        loading.dismiss();
+                    }
+                }, 3000);
             }});
-//
+    }
+
+
+
 //                //Creating an string request
 //                StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.CONFIRM_URL,
 //                        new Response.Listener<String>() {
@@ -282,4 +344,4 @@ public class Signup_Activity extends AppCompatActivity {
 //            }
 //        });
     }
-}
+

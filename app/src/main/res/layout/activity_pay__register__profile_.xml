@@ -13,6 +13,8 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/email_login_form"
+            android:background="#fff"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -44,6 +46,7 @@
 
                 <EditText
                     android:id="@+id/regname"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
@@ -59,6 +62,7 @@
 
                 <EditText
                     android:id="@+id/regemail"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
@@ -75,6 +79,7 @@
                 <EditText
                     android:id="@+id/reg_mob_num"
                     android:layout_width="match_parent"
+                    android:layout_margin="10dp"
                     android:layout_height="wrap_content"
                     android:hint="Phone"
                     android:inputType="phone"
@@ -90,6 +95,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/city"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City"
@@ -108,6 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Street"
+                    android:layout_margin="10dp"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -119,6 +126,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/d_no"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="DoorNo"
@@ -136,6 +144,7 @@
 
                 <EditText
                     android:id="@+id/pin"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Pin Code"
@@ -154,14 +163,17 @@
                 android:gravity="top"
                 android:hint="Tell us about your problem"
                 android:inputType="text|textMultiLine" />-->
+
             <Button
                 android:id="@+id/movePay"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Next"
-                android:textStyle="bold" />
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="#59ab02"
+                android:padding="12dp"
+                android:layout_margin="10dp"
+                android:text="NEXT" />
 
         </LinearLayout>
     </ScrollView>
