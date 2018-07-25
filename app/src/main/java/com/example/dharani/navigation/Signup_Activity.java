@@ -249,7 +249,7 @@ public class Signup_Activity extends AppCompatActivity {
                 Log.d("otp is :",""+otp);
 
 
-        //Network request
+                //Network request
                 String url = "http://sukes.in/appregconfirm/"+user_id+"/"+otp;
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -298,7 +298,7 @@ public class Signup_Activity extends AppCompatActivity {
 
 
 
-//                //Creating an string request
+//                //Creating a string request
 //                StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.CONFIRM_URL,
 //                        new Response.Listener<String>() {
 //                            @Override

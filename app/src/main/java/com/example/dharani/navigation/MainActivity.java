@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.orders) {
 
-            Intent intent = new Intent(this,Paid_Services_Activity.class);
+            Intent intent = new Intent(this,Order_List_Activity.class);
             startActivity(intent);
 
         } else if (id == R.id.profile) {
