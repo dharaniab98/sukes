@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+       <!--   <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="#FF34"/>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -51,6 +51,27 @@
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
+
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ServiceTYpe"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

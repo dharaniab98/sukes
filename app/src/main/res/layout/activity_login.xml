@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true">
   <!--  <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:weight="1"/>-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@raw/logo"/>
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -18,20 +26,10 @@
         android:paddingRight="24dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="#fff"
         android:elevation="4dp"
         android:paddingBottom="24dp">
-
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@raw/logo"/>
-
         <!--  Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -42,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="Email/mobile" />
         </android.support.design.widget.TextInputLayout>
 
         <!--  Password Label -->
@@ -77,9 +75,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="No account yet? Create one"
+            android:text="Not yet registered? Create one"
             android:gravity="center"
             android:textSize="16dp"/>
 
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

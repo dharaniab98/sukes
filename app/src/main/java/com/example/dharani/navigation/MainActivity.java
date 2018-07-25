@@ -225,12 +225,16 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.logout) {
             SaveSharedPreference obj = new SaveSharedPreference();
-            obj.setPrefStatus(this,"","");
+            obj.setPrefStatus(this,"","","refCode","paystats");
             //obj.setPrefStatus(this,"");
             SharedPreferences profileSharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor=profileSharedPreferences.edit();
-            editor.putString("spemail","");
-            editor.putString("spphno","");
+           // editor.putString("spemail","");
+          //  editor.putString("spphno","");
+            for(int i=0;i<20;i++) {
+                String str="profile"+String.valueOf(i);
+                editor.putString(str,"");
+            }
             editor.apply();
             this.finish();
             Intent i = new Intent(this,Login_Activity.class);
