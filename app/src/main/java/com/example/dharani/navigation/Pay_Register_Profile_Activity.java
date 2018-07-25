@@ -30,27 +30,27 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Pay_Register_Profile_Activity extends AppCompatActivity {
-    EditText streetprofile;
-    EditText pincodeprofile;
-    EditText doornoprofile;
-    String ids[]=new String[3];
-    String statusprofile;
+    private EditText streetprofile;
+    private EditText pincodeprofile;
+    private EditText doornoprofile;
+    private String ids[]=new String[3];
+    private String statusprofile;
 
     public static final String DEFAULT="Not Available";
     //country details
-    HashMap<String,String> hm=new HashMap<String,String>();
-    ArrayAdapter<String> countryAdapter;
-    Spinner spinnerCountry;
+    private HashMap<String,String> hm=new HashMap<String,String>();
+   private  ArrayAdapter<String> countryAdapter;
+    private Spinner spinnerCountry;
     //String countryPosition;
 //State details
-HashMap<String,String> hms=new HashMap<String, String>();
-    ArrayAdapter<String> stateAdapter;
-    Spinner spinnerState;
-    int statePosition;
+private HashMap<String,String> hms=new HashMap<String, String>();
+    private ArrayAdapter<String> stateAdapter;
+    private Spinner spinnerState;
+    private int statePosition;
 //city
-HashMap<String,String> hmc=new HashMap<String, String>();
-    ArrayAdapter<String> cityAdapter;
-    Spinner spinnerCity;
+private HashMap<String,String> hmc=new HashMap<String, String>();
+    private ArrayAdapter<String> cityAdapter;
+    private Spinner spinnerCity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,9 +132,10 @@ public  void getCountries(){
         new android.os.Handler().postDelayed(
                 new Runnable() {
         public void run() {
-            int i=0;
-            final String []scountry=new String[hm.size()];
+            int i=1;
+            final String []scountry=new String[hm.size()+1];
             String st=String.valueOf(hm.size());
+            scountry[0]="country";
             Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
             for(HashMap.Entry<String,String>entry:hm.entrySet())
             {
@@ -144,17 +145,25 @@ public  void getCountries(){
 
             spinnerCountry=(Spinner)findViewById(R.id.spinnerCountry);
             countryAdapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,scountry);
-            countryAdapter.add("Country");
+          //  countryAdapter.add("Country");
             countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerCountry.setAdapter(countryAdapter);
             spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 String   countryPosition=hm.get(scountry[position]);
-                  ids[0]=countryPosition;
-                             hms.clear();
-                             getState(countryPosition);
-                   Toast.makeText(getBaseContext(),scountry[position]+hm.get(scountry[position]),Toast.LENGTH_LONG).show();
+                    if(scountry[position].equals("country"))
+                    {
+                        hms.clear();
+                        hmc.clear();
+                        Toast.makeText(getBaseContext(),"SelectCountry",Toast.LENGTH_LONG).show();
+                    }
+                  //  else {
+                        String countryPosition = hm.get(scountry[position]);
+                        ids[0] = countryPosition;
+                        hms.clear();
+                        getState(countryPosition);
+                        //Toast.makeText(getBaseContext(), scountry[position] + hm.get(scountry[position]), Toast.LENGTH_LONG).show();
+                   // }
                 }
 
                 @Override
@@ -224,10 +233,11 @@ public  void getCountries(){
                 new Runnable() {
                     public void run() {
 
-                        int i=0;
-                        final String []sstate=new String[hms.size()];
-                        String st=String.valueOf(hms.size());
-                        Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
+                        int i=1;
+                        final String []sstate=new String[hms.size()+1];
+                        sstate[0]="state";
+                      //  String st=String.valueOf(hms.size());
+                        //Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
                         for(HashMap.Entry<String,String>entry:hms.entrySet())
                         {
                             sstate[i]=entry.getKey();
@@ -242,12 +252,19 @@ public  void getCountries(){
                         spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                String  StatePosition=hms.get(sstate[position]);
-                                ids[1]=StatePosition;
-                                hmc.clear();
-                                getCity(StatePosition);
-                                Toast.makeText(getBaseContext(),sstate[position]+hms.get(sstate[position]),Toast.LENGTH_LONG).show();
-                            }
+                                if(sstate[position].equals("state"))
+                                {
+                                    hmc.clear();
+
+                                }
+
+                                    String StatePosition = hms.get(sstate[position]);
+                                    ids[1] = StatePosition;
+                                    hmc.clear();
+                                    getCity(StatePosition);
+                               //     Toast.makeText(getBaseContext(), sstate[position] + hms.get(sstate[position]), Toast.LENGTH_LONG).show();
+
+                                }
 
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
@@ -310,10 +327,11 @@ public void getCity(String id)
             new Runnable() {
                 public void run() {
 
-                    int i=0;
-                    final String []scity=new String[hmc.size()];
-                    String st=String.valueOf(hmc.size());
-                    Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
+                    int i=1;
+                    final String []scity=new String[hmc.size()+1];
+                    //String st=String.valueOf(hmc.size());
+                    //Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
+                    scity[0]="city";
                     for(HashMap.Entry<String,String>entry:hmc.entrySet())
                     {
                         scity[i]=entry.getKey();
@@ -328,12 +346,19 @@ public void getCity(String id)
                     spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String  cityPosition=hmc.get(scity[position]);
-                            ids[2]=cityPosition;
-                            //getState(countryPosition);
+                            if(scity[position].equals("city"))
+                            {
+                                Toast.makeText(getBaseContext(),"selectstate",Toast.LENGTH_SHORT).show();
+                            }
 
-                            Toast.makeText(getBaseContext(),scity[position]+hms.get(scity[position]),Toast.LENGTH_LONG).show();
-                        }
+
+                                String cityPosition = hmc.get(scity[position]);
+                                ids[2] = cityPosition;
+                                //getState(countryPosition);
+
+                             //   Toast.makeText(getBaseContext(), scity[position] + hms.get(scity[position]), Toast.LENGTH_LONG).show();
+
+                            }
 
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {

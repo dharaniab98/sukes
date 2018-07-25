@@ -102,20 +102,68 @@
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+              <!--  <AutoCompleteTextView
+                    android:id="@+id/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="country"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />-->
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinnerState"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+               <!-- <AutoCompleteTextView
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="state"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />-->
+
+            </android.support.design.widget.TextInputLayout>
+
+
 
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"/>
 
-                <AutoCompleteTextView
+             <!--   <AutoCompleteTextView
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true" />-->
 
             </android.support.design.widget.TextInputLayout>
 
