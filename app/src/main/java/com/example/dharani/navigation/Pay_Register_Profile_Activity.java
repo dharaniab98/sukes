@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -67,18 +68,30 @@ private HashMap<String,String> hmc=new HashMap<String, String>();
         // On complete call either onLoginSuccess or onLoginFailed
       //  email.setText(rmail);
        // uphno.setText(rphno);
+
          streetprofile=(EditText)findViewById(R.id.street);
          pincodeprofile=(EditText)findViewById(R.id.pin);
          doornoprofile=(EditText)findViewById(R.id.d_no);
+        SharedPreferences  pshared = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+//        if((pshared.getString("profile11", "null")!=null))
+//        {
+//            pincodeprofile.setText((pshared.getString("profile11", "").toString()));
+//        }
 
         Button registerIntent = (Button) findViewById(R.id.movePay);
         registerIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendRegisteredData();
-              // getCountries();
-               // Intent regIntent=new Intent(v.getContext(),PayRegister_Activity.class);
-               // startActivity(regIntent);
+                if(!validate())
+                {
+                    Toast.makeText(getBaseContext(), "failed", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(), "sucess", Toast.LENGTH_LONG).show();
+                    sendRegisteredData();
+                }
+
             }
         });
 
@@ -443,6 +456,63 @@ public void sendRegisteredData()
 
 
 
+    private boolean validate()
+    {
+        boolean valid=true;
+      //  String name=serviceName.getText().toString();
+      //  String mob=serviceMobile.getText().toString();
+       // String email=serviceMail.getText().toString();
+        String street=streetprofile.getText().toString();
+       // String type=serviceType.getText().toString();
+        //String city=serviceCity.getText().toString();
+        String drNo=doornoprofile.getText().toString();
+        String pin=pincodeprofile.getText().toString();
+//        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//            serviceMail.setError("enter a valid email address");
+//            valid = false;
+//        } else {
+//            serviceMail.setError(null);
+//        }
+//        if (mob.isEmpty() || !Patterns.PHONE.matcher(mob).matches()) {
+//            serviceMobile.setError("enter a mobile number");
+//            valid = false;
+//        } else {
+//            serviceMobile.setError(null);
+//        }
+//        if (name.isEmpty()) {
+//            serviceName.setError("enter a name");
+//            valid = false;
+//        } else {
+//            serviceName.setError(null);
+//        }
+        if (street.isEmpty() ) {
+            streetprofile.setError("enter a valid street address");
+            valid = false;
+        } else {
+            streetprofile.setError(null);
+        }
+        if (drNo.isEmpty() ) {
+            doornoprofile.setError("enter a  drno address");
+            valid = false;
+        } else {
+            doornoprofile.setError(null);
+        }
+
+//        if (city.isEmpty() ) {
+//            serviceCity.setError("enter a city ");
+//            valid = false;
+//        } else {
+//            serviceCity.setError(null);
+//        }
+
+        if (pin.isEmpty() ) {
+            pincodeprofile.setError("enter a valid PinCode");
+            valid = false;
+        } else {
+            pincodeprofile.setError(null);
+        }
+        return valid;
+    }
 
 
 

@@ -1,6 +1,9 @@
 package com.example.dharani.navigation;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,32 +58,32 @@ public class Complaint_Activity extends AppCompatActivity {
     EditText serviceType;
     AutoCompleteTextView serviceMail;
     AutoCompleteTextView serviceMobile;
-    AutoCompleteTextView serviceCity;
+   AutoCompleteTextView serviceCity;
     AutoCompleteTextView serviceStreet;
     AutoCompleteTextView serviceDrNo;
     AutoCompleteTextView servicePinCode;
     private Button sub;
+    EditText serviceDesc;
+    String serviceMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //
 
 
-        getCountries();
+
 
         //getState(String );
         // final EditText email = (EditText) findViewById(R.id.regemail);
         // final EditText uphno = (EditText) findViewById(R.id.reg_mob_num);
-        // SharedPreferences pshared = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+
+       // SharedPreferences  pshared = getSharedPreferences("MyData", Context.MODE_PRIVATE);
 
         // String rmail = pshared.getString("spemail", DEFAULT);
         // String rphno = pshared.getString("spphno", DEFAULT);
         // On complete call either onLoginSuccess or onLoginFailed
         //  email.setText(rmail);
         // uphno.setText(rphno);
-        streetprofile=(EditText)findViewById(R.id.street);
-        pincodeprofile=(EditText)findViewById(R.id.pin);
-        doornoprofile=(EditText)findViewById(R.id.d_no);
 
 
 
@@ -98,36 +101,82 @@ public class Complaint_Activity extends AppCompatActivity {
         String service_type = getIntent().getStringExtra("TYPE_SERVICE");
         Log.d("service is:",""+service_type);
 
-        EditText textView = (EditText) findViewById(R.id.type);
-        textView.setText(service_type);
+        serviceType = (EditText) findViewById(R.id.type);
+        serviceType.setText(service_type);
+         if((getIntent().getStringExtra("SERVICE").equals("paid")))
+        {
+            serviceMoney="paid";
+            Toast.makeText(this,serviceMoney,Toast.LENGTH_LONG).show();
+        }
+        else {
+             serviceMoney="registered";
+             Toast.makeText(this, serviceMoney, Toast.LENGTH_LONG).show();
+         }
+
         sub=(Button)findViewById(R.id.submit);
-        serviceType=(EditText) findViewById(R.id.type);
+       // serviceType=(EditText) findViewById(R.id.type);
         servicePinCode=(AutoCompleteTextView)findViewById(R.id.pin);
         serviceDrNo=(AutoCompleteTextView)findViewById(R.id.d_no);
         serviceStreet=(AutoCompleteTextView)findViewById(R.id.street);
         serviceName=(AutoCompleteTextView)findViewById(R.id.name);
         serviceMail=(AutoCompleteTextView)findViewById(R.id.email);
         serviceMobile=(AutoCompleteTextView)findViewById(R.id.mob_num);
-
+        serviceDesc=(EditText)findViewById(R.id.feedback);
+        SharedPreferences  pshared = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+       if((pshared.getString("profile1", "null")!=null))
+        {
+            serviceName.setText(pshared.getString("profile1", ""));
+        }
+        if(pshared.getString("profile2", "null")!=null)
+        {
+            serviceMail.setText(pshared.getString("profile2", ""));
+        }
+        if(pshared.getString("profile3", "null")!=null) {
+            serviceMobile.setText(pshared.getString("profile3", ""));
+        }
+//       String pinc= pshared.getString("profile11", "null");
+//       if(pinc!=null){
+//            servicePinCode.setText(pshared.getString("profile11", ""));
+//        }
+//        //serviceStreet.setText(pshared.getString("profile7", ""));
+       getCountries();
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendRegisteredData();
-//                if(!validate())
-//                {
-//                    Toast.makeText(getBaseContext(), "failed", Toast.LENGTH_LONG).show();
-//                }
-//                else
-//                {
-//                    Toast.makeText(getBaseContext(), "sucess", Toast.LENGTH_LONG).show();
-//                }
-            }
-        });
+
+                if(!validate())
+                {
+                    Toast.makeText(getBaseContext(), "failed", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(), "sucess", Toast.LENGTH_LONG).show();
+                    sendRegisteredData();
+                }
+          }
+      });
 
 
     }
-
-
+//
+//protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    // TODO Auto-generated method stub
+//    super.onActivityResult(requestCode, resultCode, data);
+//
+//    //could replace it with a switch
+//    if (requestCode == 0){
+//
+//        serviceMoney=data.getStringExtra("SERVICE");
+//        Log.d("service",""+serviceMoney);
+//        Toast.makeText(this,serviceMoney,Toast.LENGTH_LONG).show();
+//    }
+//    if (requestCode == 1){
+//        serviceMoney=data.getStringExtra("SERVICE");
+//        Log.d("service",""+serviceMoney);
+//        Toast.makeText(this,serviceMoney,Toast.LENGTH_LONG).show();
+//    }
+//
+//}
 
 
 
@@ -165,7 +214,7 @@ public class Complaint_Activity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error","connection error in networking "+error);
-
+                        Toast.makeText(getBaseContext(),"NO CONNECTION",Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -182,14 +231,14 @@ public class Complaint_Activity extends AppCompatActivity {
                         final String []scountry=new String[hm.size()+1];
                         String st=String.valueOf(hm.size());
                         scountry[0]="country";
-                        Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
                         for(HashMap.Entry<String,String>entry:hm.entrySet())
                         {
                             scountry[i]=entry.getKey();
                             i++;
                         }
 
-                        spinnerCountry=(Spinner)findViewById(R.id.spinnerCountry);
+                        spinnerCountry=(Spinner)findViewById(R.id.spinCountry);
                         countryAdapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,scountry);
                         //  countryAdapter.add("Country");
                         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -201,7 +250,7 @@ public class Complaint_Activity extends AppCompatActivity {
                                 {
                                     hms.clear();
                                     hmc.clear();
-                                    Toast.makeText(getBaseContext(),"SelectCountry",Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(getBaseContext(),"SelectCountry",Toast.LENGTH_LONG).show();
                                 }
                                 //  else {
                                 String countryPosition = hm.get(scountry[position]);
@@ -290,7 +339,7 @@ public class Complaint_Activity extends AppCompatActivity {
                             i++;
                         }
 
-                        spinnerState=(Spinner)findViewById(R.id.spinnerState);
+                        spinnerState=(Spinner)findViewById(R.id.spinState);
 
                         stateAdapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,sstate);
                         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -384,7 +433,7 @@ public class Complaint_Activity extends AppCompatActivity {
                             i++;
                         }
 
-                        spinnerCity=(Spinner)findViewById(R.id.spinnerCity);
+                        spinnerCity=(Spinner)findViewById(R.id.spinCity);
 
                         cityAdapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,scity);
                         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -426,7 +475,15 @@ public class Complaint_Activity extends AppCompatActivity {
     public void sendRegisteredData()
     {
 
-
+        String name=serviceName.getText().toString();
+        String mob=serviceMobile.getText().toString();
+        String email=serviceMail.getText().toString();
+        String street=serviceStreet.getText().toString();
+        String type=serviceType.getText().toString();
+        //String city=serviceCity.getText().toString();
+        String drNo=serviceDrNo.getText().toString();
+        String pin=servicePinCode.getText().toString();
+        String desc=serviceDesc.getText().toString();
         final SaveSharedPreference preference = new SaveSharedPreference();
         // final String status_Pref = preference.getPrefStatus(this);
         String userid = preference.getPrefUserid(this);
@@ -438,12 +495,10 @@ public class Complaint_Activity extends AppCompatActivity {
         progressDialog.setMessage("Registering Account...");
         progressDialog.show();
 
-        String streettext = streetprofile.getText().toString();
-        String pincode = pincodeprofile.getText().toString();
-        String doorno=doornoprofile.getText().toString();
-        Toast.makeText(getBaseContext(),streettext+ids[0]+ids[1]+userid,Toast.LENGTH_LONG).show();
-        Log.e("val",streettext+ids[0]+ids[1]+userid);
-        String url = "http://www.sukes.in/app-locaton/"+userid+"/"+doorno+"/"+streettext+"/"+ids[0]+"/"+ids[1]+"/"+ids[2]+"/"+pincode;
+
+        Toast.makeText(getBaseContext(),street+ids[0]+ids[1]+userid,Toast.LENGTH_LONG).show();
+        Log.e("val",street+ids[0]+ids[1]+userid);
+        String url = "http://www.sukes.in/app-complaint/"+userid+"/"+email+"/"+mob+"/"+serviceMoney+"/"+type+"/"+drNo+"/"+street+"/"+ids[0]+"/"+ids[1]+"/"+ids[2]+"/"+pin+"/"+desc;
         //signup networking code
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -451,7 +506,7 @@ public class Complaint_Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONObject obj = response.getJSONObject("locationupdate");
+                            JSONObject obj = response.getJSONObject("orderupdate");
                             statusprofile = obj.getString("result");
                             Log.d("status is:",""+statusprofile);
 
@@ -489,27 +544,6 @@ public class Complaint_Activity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private boolean validate()
     {
         boolean valid=true;
@@ -518,7 +552,7 @@ public class Complaint_Activity extends AppCompatActivity {
         String email=serviceMail.getText().toString();
         String street=serviceStreet.getText().toString();
         String type=serviceType.getText().toString();
-        String city=serviceCity.getText().toString();
+       //String city=serviceCity.getText().toString();
         String drNo=serviceDrNo.getText().toString();
         String pin=servicePinCode.getText().toString();
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -552,12 +586,12 @@ public class Complaint_Activity extends AppCompatActivity {
             serviceDrNo.setError(null);
         }
 
-        if (city.isEmpty() ) {
-            serviceCity.setError("enter a city ");
-            valid = false;
-        } else {
-            serviceCity.setError(null);
-        }
+//        if (city.isEmpty() ) {
+//            serviceCity.setError("enter a city ");
+//            valid = false;
+//        } else {
+//            serviceCity.setError(null);
+//        }
         if (type.isEmpty() ) {
             serviceType.setError("enter a service");
             valid = false;

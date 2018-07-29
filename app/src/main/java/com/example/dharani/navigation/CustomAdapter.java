@@ -2,7 +2,6 @@ package com.example.dharani.navigation;
 
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,9 @@ public class CustomAdapter extends ArrayAdapter<OrderData> implements View.OnCli
     // View lookup cache
     private static class ViewHolder {
         TextView service_name;
-        TextView date;
+        TextView service_type;
         TextView status;
+        TextView order_id;
     }
 
     public CustomAdapter(ArrayList<OrderData> data, Context context) {
@@ -51,8 +51,9 @@ public class CustomAdapter extends ArrayAdapter<OrderData> implements View.OnCli
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_item, parent, false);
             viewHolder.service_name = (TextView) convertView.findViewById(R.id.service_name);
-            viewHolder.date = (TextView) convertView.findViewById(R.id.complaint_date);
+            viewHolder.service_type = (TextView) convertView.findViewById(R.id.service_type);
             viewHolder.status = (TextView) convertView.findViewById(R.id.status);
+            viewHolder.order_id=(TextView)convertView.findViewById(R.id.order_id);
 
 
             result=convertView;
@@ -64,8 +65,9 @@ public class CustomAdapter extends ArrayAdapter<OrderData> implements View.OnCli
         }
 
         viewHolder.service_name.setText(dataModel.getService_name());
-        viewHolder.date.setText(dataModel.getComplaint_date());
+        viewHolder.service_type.setText(dataModel.getService_type());
         viewHolder.status.setText(dataModel.getStatus());
+        viewHolder.order_id.setText(dataModel.getOrder_id());
 
         // Return the completed view to render on screen
         return convertView;

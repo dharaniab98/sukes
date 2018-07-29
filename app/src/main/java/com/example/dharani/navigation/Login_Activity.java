@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +21,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static android.content.ContentValues.TAG;
 
@@ -31,52 +41,57 @@ public class Login_Activity extends Activity {
     TextView  signupLink;
     EditText emailText;
     EditText passwordText;
-//login page user entering data
+    //login page user entering data
     String email;
     String password;
 
 
-  //login page requested data froom service
+    //login page requested data froom service
     String status;
 
     String userid;
     String refCode;
     String paystatus;
-     String user_Pref;
+    String user_Pref;
 
 
     //Used to store profile personal Details values
-       String profileFirstName;
-       String profileLastName;
-       String altPin;
-       //0String profileFullName;
-       //1String profileUserName;
-       //2String profileEmail;
-       //3String profilePhoneNumber1;
-       //4String profilePhoneNumber2;
-       //5String profileAdharCardNo;
-       //6String profilePanCardNo;
+    String profileFirstName;
+    String profileLastName;
+    String altPin;
+    //0String profileFullName;
+    //1String profileUserName;
+    //2String profileEmail;
+    //3String profilePhoneNumber1;
+    //4String profilePhoneNumber2;
+    //5String profileAdharCardNo;
+    //6String profilePanCardNo;
 
     //Used to store profile Address 1 Details values
-       //7String contactStreet;
-       //8String contactCity;
-       //9String contactState;
-       //10String contactCountry;
-       //11String contactPinCode;
+    //7String contactStreet;
+    //8String contactCity;
+    //9String contactState;
+    //10String contactCountry;
+    //11String contactPinCode;
 
-       //Used to store Service Address
-       //12String serviceStreet;
+    //Used to store Service Address
+    //12String serviceStreet;
     //13String serviceCity;
     //14String serviceState;
     //15String serviceCountry;
 
 
     //Uzsed to store paymentdetails
-     //16String profileBankName;
-     //17String profileBankAccNo;
-     //18String profileISFCCode;
-     //19String profileBankAddress;
+    //16String profileBankName;
+    //17String profileBankAccNo;
+    //18String profileISFCCode;
+    //19String profileBankAddress;
     String profile[]=new String[20];
+
+    List<OrderData> dataModels = new ArrayList<OrderData>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +136,7 @@ public class Login_Activity extends Activity {
         if (!validate()) {
             onLoginFailed();
             return;
-         }
+        }
 
         loginButton.setEnabled(false);
 
@@ -145,7 +160,7 @@ public class Login_Activity extends Activity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject obj = response.getJSONObject("loggedInId");
-                             status = obj.getString("result");
+                            status = obj.getString("result");
                             userid=obj.getString("userId");
                             refCode=obj.getString("refCode");
                             paystatus=obj.getString("paystatus");
@@ -161,8 +176,11 @@ public class Login_Activity extends Activity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                      Log.e("error","connection error in networking "+error);
-
+                        Log.e("error","connection error in networking "+error);
+                        Toast.makeText(getBaseContext(),"NO CONNECTION",Toast.LENGTH_LONG).show();
+                        status="false";
+                      //  Intent intent=new Intent(Login_Activity.this,Login_Activity.class);
+                       // startActivity(intent);
                     }
                 });
 
@@ -170,7 +188,7 @@ public class Login_Activity extends Activity {
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
         final SaveSharedPreference preference = new SaveSharedPreference();
         final String status_Pref = preference.getPrefStatus(this);
-              user_Pref = preference.getPrefUserid(this);
+        user_Pref = preference.getPrefUserid(this);
 
 
         new android.os.Handler().postDelayed(
@@ -181,8 +199,9 @@ public class Login_Activity extends Activity {
                         if(status.equals("true")){ //|| status_Pref.equals("true")){
                             storeProfile();
                             onLoginSuccess();
-                         }else
+                        }else
                         {
+
                             onLoginFailed();
                         }
 
@@ -216,7 +235,7 @@ public class Login_Activity extends Activity {
         SaveSharedPreference obj = new SaveSharedPreference();
         obj.setPrefStatus(this,status,userid,refCode,paystatus);
 
-      //  obj.setPrefStatus(this,userid);
+        //  obj.setPrefStatus(this,userid);
         this.finish();
         System.gc();
         Intent home = new Intent(this,MainActivity.class);
@@ -264,8 +283,8 @@ public class Login_Activity extends Activity {
                             profileFirstName=obj.getString("first_name");
                             profileLastName=obj.getString("last_name");
                             profile[1]=obj.getString("user_name");
-                           profile[2]= obj.getString("email_id");
-                           profile[3]=obj.getString("phone_no");
+                            profile[2]= obj.getString("email_id");
+                            profile[3]=obj.getString("phone_no");
                             profile[4] =obj.getString("alt_phone");
                             profile[5]=obj.getString("aadhaarNo");;
                             profile[6]=obj.getString("panCard");
@@ -294,7 +313,7 @@ public class Login_Activity extends Activity {
                             profile[19]=obj.getString("bankAddress");
 
 
-                        //    Log.d("status is:",""+email);
+                            //    Log.d("status is:",""+email);
                         }catch(Exception e){
                             Log.e("json parse error:","exception:"+e);
                         }
@@ -304,6 +323,9 @@ public class Login_Activity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error","connection error in networking "+error);
+                        Intent intent = new Intent(Login_Activity.this,Login_Activity.class);
+                        startActivity(intent);
+
 
                     }
                 });
@@ -317,11 +339,11 @@ public class Login_Activity extends Activity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                SharedPreferences profileSharedPreferences=getSharedPreferences("MyData",Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor=profileSharedPreferences.edit();
-                profile[0]=profileFirstName.toString()+profileLastName.toString();
-                profile[15]=profile[15]+"-"+altPin;
-                //dggfhf
+                        SharedPreferences profileSharedPreferences=getSharedPreferences("MyData",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=profileSharedPreferences.edit();
+                        profile[0]=profileFirstName.toString()+profileLastName.toString();
+                        profile[15]=profile[15]+"-"+altPin;
+                        //dggfhf
                         profile[7]+=",";
                         profile[8]+=",";
                         profile[9]+=",";
@@ -329,16 +351,109 @@ public class Login_Activity extends Activity {
                         profile[12]+=",";
                         profile[13]+=",";
                         profile[14]+=",";
-                for(int i=0;i<profile.length;i++) {
-                    editor.putString("profile"+String.valueOf(i), profile[i].toString());
+                        for(int i=0;i<profile.length;i++) {
+                            editor.putString("profile"+String.valueOf(i), profile[i].toString());
 
-                  //  editor.putString("spphno", profile[6].toString());
-                }
-                editor.apply();
+                            //  editor.putString("spphno", profile[6].toString());
+                        }
+                        editor.apply();
 
                     }
                 }, 3000);
 
 
     }
+
+//    public void storeOrderData(){
+//
+//        String url = "http://www.sukes.in/allorders/2";
+//
+//
+//
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+//                (Request.Method.GET, url, null, new Response.Listener<JSONObject>()
+//                {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            Log.d("network request","working");
+//
+//                            JSONArray orders = response.getJSONArray("ordersData");
+//                            for(int i=0;i<orders.length();i++)
+//                            {
+//                                JSONObject jsonObject=(JSONObject)orders.get(i);
+//                                String service_name = jsonObject.getString("servicename");
+//                                String service_type = jsonObject.getString("servicetype");
+//                                String order_id = jsonObject.getString("orderid");
+//                                String order_status = jsonObject.getString("orderstatus");
+//                                dataModels.add(new OrderData(service_name,service_type,order_status,order_id));
+//
+//
+//
+//
+//                            }
+//
+//                            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("OrderData", Context.MODE_PRIVATE);
+//
+//                            SharedPreferences.Editor editor = sharedPreferences.edit();
+//                            String key = "Orders";
+//
+//                                Gson gson = new Gson();
+//                                String json = gson.toJson(dataModels);
+//                                editor.putString(key, json);
+//                                editor.commit();
+//
+//
+//
+//                        }catch(Exception e){
+//                            Log.e("json parse error:","exception:"+e);
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.e("error","connection error in networking "+error);
+//
+//                    }
+//                });
+//
+//        // Access the RequestQueue through your singleton class.
+//        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+//
+//    }
+
+
+    public <T> void setList(String key, List<T> list) {
+
+    }
+
+    public void set(String key, String value) {
+
+
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        MyApplication.getInstance().setConnectivityListener(this);
+//    }
+//
+//    @Override
+//    public void onNetworkConnectionChanged(boolean isConnected) {
+//        showSnack(isConnected);
+//    }
+//
+//    private void showSnack(boolean isConnected) {
+//        String message;
+//
+//        if (!isConnected) {
+//            message = "Sorry! Not connected to internet";;
+//
+//        }
+//
+//        Toast.makeText(this, "Please.. Connect to Internet", Toast.LENGTH_SHORT).show();
+//
+//    }
+
 }

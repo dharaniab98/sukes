@@ -25,11 +25,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    String paystatus;
     ImageView ElectricalsIntent;
     ImageView KitchenIntent;
     ImageView SanitationIntent;
@@ -55,6 +56,16 @@ public class MainActivity extends AppCompatActivity
         ObjectAnimator blinkAnim=(ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(),R.animator.blinking_animation);
         blinkAnim.setTarget(blink);
         blinkAnim.start();*/
+        LinearLayout li=(LinearLayout)findViewById(R.id.displayRegister);
+        final SaveSharedPreference preference = new SaveSharedPreference();
+         paystatus = preference.getPrefPaystatus(this);
+        String userid = preference.getPrefUserid(this);
+
+
+        if(paystatus.equals("true"))
+        {
+            li.setVisibility(LinearLayout.GONE);
+        }
 
 
 
@@ -92,10 +103,16 @@ public class MainActivity extends AppCompatActivity
         ElectricalsIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               Intent electric=new Intent(v.getContext(),Complaint_Activity.class);
-               electric.putExtra("TYPE_SERVICE","Electrical");
-               startActivity(electric);
+                if(paystatus.equals("true")) {
+                    Intent electric = new Intent(v.getContext(), Complaint_Activity.class);
+                    electric.putExtra("TYPE_SERVICE", "Electrical");
+                    electric.putExtra("SERVICE", "free");
+                    startActivityForResult(electric, 1);
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"Please Register",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         KitchenIntent = (ImageView) findViewById(R.id.kitchens);
@@ -103,19 +120,33 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
+                if(paystatus.equals("true")) {
                 Intent kitchen=new Intent(v.getContext(),Complaint_Activity.class);
                 kitchen.putExtra("TYPE_SERVICE","Kitchen");
-                startActivity(kitchen);
+                kitchen.putExtra("SERVICE","free");
+                startActivityForResult(kitchen,1);
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"Please Register",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         SanitationIntent = (ImageView) findViewById(R.id.sanitations);
         SanitationIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(paystatus.equals("true")) {
+                    Intent sanitation = new Intent(v.getContext(), Complaint_Activity.class);
+                    sanitation.putExtra("TYPE_SERVICE", "Sanitation");
+                    sanitation.putExtra("SERVICE", "free");
+                    startActivityForResult(sanitation, 1);
+                }
+                else
+                {
+                        Toast.makeText(getBaseContext(),"Please Register",Toast.LENGTH_SHORT).show();
+                }
 
-                Intent sanitation=new Intent(v.getContext(),Complaint_Activity.class);
-                sanitation.putExtra("TYPE_SERVICE","Sanitation");
-                startActivity(sanitation);
             }
         });
 
@@ -123,10 +154,16 @@ public class MainActivity extends AppCompatActivity
         plumberIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(paystatus.equals("true")) {
                 Intent plumbing=new Intent(v.getContext(),Complaint_Activity.class);
                 plumbing.putExtra("TYPE_SERVICE","Plumbing");
-                startActivity(plumbing);
+                plumbing.putExtra("SERVICE","free");
+                startActivityForResult(plumbing,1);
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"Please Register",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -144,7 +181,7 @@ public class MainActivity extends AppCompatActivity
         registerIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getBaseContext(),paystatus,Toast.LENGTH_SHORT).show();
                 Intent regIntent=new Intent(v.getContext(),Register_Benefits_Activity.class);
                 startActivity(regIntent);
             }
@@ -179,27 +216,27 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     @SuppressWarnings("StatementWithEmptyBody")

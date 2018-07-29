@@ -66,7 +66,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#59ab02"
             android:layout_weight="3"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
@@ -75,8 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3"
-                android:layout_weight="1">
+            android:weightSum="4">
             <LinearLayout
 
                 android:layout_width="0dp"
@@ -96,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="ElectricalServices"
-                    android:textSize="12dp"
+                    android:textSize="8dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
 
@@ -119,9 +117,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
+
                     android:text="PlumberServices"
-                    android:textSize="12dp"
+                    android:textSize="8dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     />
@@ -143,79 +141,79 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
+
                     android:text="SanitationServices"
-                    android:textSize="12dp"
+                    android:textSize="8dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     />
 
             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:background="#59ab02">
+                    <ImageView
+                        android:id="@+id/kitchens"
+                        style="@style/content_main_image"
+                        android:src="@raw/ic_launcher_kitchen"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="kitchenServices"
+                        android:textSize="8dp"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        />
+
+                </LinearLayout>
 
 
-        </LinearLayout>
+
+            </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-                android:layout_weight="1">
+            android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="#59ab02">
-                <ImageView
-                    android:id="@+id/kitchens"
-                    style="@style/content_main_image"
-                    android:src="@raw/ic_launcher_kitchen"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
-                    android:text="kitchenServices"
-                    android:textSize="12dp"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="#59ab02">
 
                 <TextView
                     android:id="@+id/paids"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:text="PaidServices"
-                    android:textSize="13dp"
+                    android:textSize="24dp"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     />
 
             </LinearLayout>
 
-            <LinearLayout
+         <!--   <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="#59ab02">
 
-            </LinearLayout>
+            </LinearLayout>-->
 
 
         </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/displayRegister"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"

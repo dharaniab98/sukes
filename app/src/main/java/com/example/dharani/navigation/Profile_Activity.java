@@ -27,7 +27,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Profile_Activity extends AppCompatActivity {
 
-     public static final String DEFAULT="Not Available";
+    private String profile[]=new String[20];
+   private  String altPin;
+   private String profileFirstName;
+    private String profileLastName;
+//     public static final String DEFAULT="Not Available";
     //String email;
    // String phno;
    // Context context;
@@ -62,7 +66,7 @@ public class Profile_Activity extends AppCompatActivity {
         SharedPreferences pshared = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         for(int i=0;i<txt.length;i++) {
             String str="profile"+String.valueOf(i);
-            txt[i] = pshared.getString(str, DEFAULT);
+            txt[i] = pshared.getString(str, "NOT AVAILABLE");
             t[i].setText(txt[i]);
         }
         // On complete call either onLoginSuccess or onLoginFailed
@@ -110,6 +114,7 @@ public class Profile_Activity extends AppCompatActivity {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.profileRefresh:
                 refresh();
+                storeProfile();
                 return true;
             // Respond to a click on the "Delete all entries" menu option
           //  case R.id.action_delete_all_entries:
@@ -127,8 +132,112 @@ public class Profile_Activity extends AppCompatActivity {
         SharedPreferences pshared = getSharedPreferences("MyData", Context.MODE_PRIVATE);
        for(int i=0;i<txt.length;i++) {
            String str="profile"+String.valueOf(i);
-           txt[i] = pshared.getString(str, DEFAULT);
-           t[i].setText(txt[i]);
+           if((pshared.getString(str,"").equals("null")||(pshared.getString(str,"").equals("nullnull"))||(pshared.getString(str,"").equals("null,")))) {
+               t[i].setText("Not Available");
+           }
+           else
+           {
+               txt[i] = pshared.getString(str, "NOT AVAILABLE");
+               t[i].setText(txt[i]);
+           }
+
        }
       }
+
+
+    private void storeProfile(){
+        final SaveSharedPreference preference = new SaveSharedPreference();
+        // final String status_Pref = preference.getPrefStatus(this);
+        String userid = preference.getPrefUserid(this);
+
+        String url = "http://www.sukes.in/appprofile/"+userid;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("loggedInId");
+                            profileFirstName=obj.getString("first_name");
+                            profileLastName=obj.getString("last_name");
+                            profile[1]=obj.getString("user_name");
+                            profile[2]= obj.getString("email_id");
+                            profile[3]=obj.getString("phone_no");
+                            profile[4] =obj.getString("alt_phone");
+                            profile[5]=obj.getString("aadhaarNo");;
+                            profile[6]=obj.getString("panCard");
+
+                            //Address Contact
+                            profile[7]=obj.getString("address");
+                            profile[8]=obj.getString("cityName");
+                            profile[9]=obj.getString("stateName");
+                            profile[10]=obj.getString("countryName");
+                            profile[11]=obj.getString("pincode");
+
+                            //Service Address
+                            profile[12]=obj.getString("alt_address");
+                            profile[13]=obj.getString("altcityName");
+                            profile[14]=obj.getString("altstateName");
+                            profile[15]=obj.getString("altcountryName");
+                            altPin=obj.getString("alt_pincode");
+                            //servicePinCode=obj.getString("pincode");
+
+
+                            //payment Details
+
+                            profile[16]=obj.getString("bankName");
+                            profile[17]=obj.getString("bankAccNo");
+                            profile[18]=obj.getString("bankIFSC");
+                            profile[19]=obj.getString("bankAddress");
+
+
+                            //    Log.d("status is:",""+email);
+                        }catch(Exception e){
+                            Log.e("json parse error:","exception:"+e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error","connection error in networking "+error);
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        // final SaveSharedPreference preference = new SaveSharedPreference();
+        // final String status_Pref = preference.getPrefStatus(this);
+
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        SharedPreferences profileSharedPreferences=getSharedPreferences("MyData",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=profileSharedPreferences.edit();
+                        profile[0]=profileFirstName.toString()+profileLastName.toString();
+                        profile[15]=profile[15]+"-"+altPin;
+                        //dggfhf
+                        profile[7]+=",";
+                        profile[8]+=",";
+                        profile[9]+=",";
+                        profile[10]+="-";
+                        profile[12]+=",";
+                        profile[13]+=",";
+                        profile[14]+=",";
+                        for(int i=0;i<profile.length;i++) {
+                            editor.putString("profile"+String.valueOf(i), profile[i].toString());
+
+                            //  editor.putString("spphno", profile[6].toString());
+                        }
+                        editor.apply();
+
+                    }
+                }, 3000);
+
+
+    }
+
 }

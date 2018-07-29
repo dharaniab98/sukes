@@ -22,10 +22,10 @@ public class Paid_Services_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Electrical Serices");
+        arrayList.add("Electrical Services");
         arrayList.add("Plumber Services");
-        arrayList.add("Kitchen Drivers");
-        arrayList.add("Sanitation Drivers");
+        arrayList.add("Kitchen Services");
+        arrayList.add("Sanitation Services");
         arrayList.add("Acting Drivers");
         arrayList.add("Events");
         arrayList.add("CC Camera Services");
@@ -54,6 +54,7 @@ public class Paid_Services_Activity extends AppCompatActivity {
                 Log.e("inside listview","on item selected");
                Intent intent = new Intent(view.getContext(),Complaint_Activity.class);
                intent.putExtra("TYPE_SERVICE",arrayList.get(position));
+               intent.putExtra("SERVICE","paid");
                startActivityForResult(intent,0);
 
             }
