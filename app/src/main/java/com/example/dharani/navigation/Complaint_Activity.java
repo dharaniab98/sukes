@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.TreeSet;
 
 import static android.widget.Toast.makeText;
 
@@ -106,11 +107,11 @@ public class Complaint_Activity extends AppCompatActivity {
          if((getIntent().getStringExtra("SERVICE").equals("paid")))
         {
             serviceMoney="paid";
-            Toast.makeText(this,serviceMoney,Toast.LENGTH_LONG).show();
+           // Toast.makeText(this,serviceMoney,Toast.LENGTH_LONG).show();
         }
         else {
-             serviceMoney="registered";
-             Toast.makeText(this, serviceMoney, Toast.LENGTH_LONG).show();
+             serviceMoney="free";
+            // Toast.makeText(this, serviceMoney, Toast.LENGTH_LONG).show();
          }
 
         sub=(Button)findViewById(R.id.submit);
@@ -227,12 +228,15 @@ public class Complaint_Activity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+                        //TreeSet ts=new TreeSet(hm.keySet());
+
                         int i=1;
                         final String []scountry=new String[hm.size()+1];
                         String st=String.valueOf(hm.size());
                         scountry[0]="country";
                         //Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
-                        for(HashMap.Entry<String,String>entry:hm.entrySet())
+                       for(HashMap.Entry<String,String>entry:hm.entrySet())
+
                         {
                             scountry[i]=entry.getKey();
                             i++;
@@ -443,7 +447,7 @@ public class Complaint_Activity extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 if(scity[position].equals("city"))
                                 {
-                                    Toast.makeText(getBaseContext(),"selectstate",Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getBaseContext(),"selectstate",Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -532,10 +536,10 @@ public class Complaint_Activity extends AppCompatActivity {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
                         if(statusprofile.equals("true")){
-                            Toast.makeText(getBaseContext(),"hello",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(),"submitted",Toast.LENGTH_SHORT).show();
                         }
                         else {
-
+                            Toast.makeText(getBaseContext(),"retry",Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
                     }

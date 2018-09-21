@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity
         registerIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),paystatus,Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(getBaseContext(),paystatus,Toast.LENGTH_SHORT).show();
                 Intent regIntent=new Intent(v.getContext(),Register_Benefits_Activity.class);
                 startActivity(regIntent);
             }

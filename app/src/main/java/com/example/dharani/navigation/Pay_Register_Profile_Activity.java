@@ -149,7 +149,7 @@ public  void getCountries(){
             final String []scountry=new String[hm.size()+1];
             String st=String.valueOf(hm.size());
             scountry[0]="country";
-            Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getBaseContext(),st,Toast.LENGTH_LONG).show();
             for(HashMap.Entry<String,String>entry:hm.entrySet())
             {
                 scountry[i]=entry.getKey();
@@ -168,7 +168,7 @@ public  void getCountries(){
                     {
                         hms.clear();
                         hmc.clear();
-                        Toast.makeText(getBaseContext(),"SelectCountry",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(),"SelectCountry",Toast.LENGTH_SHORT).show();
                     }
                   //  else {
                         String countryPosition = hm.get(scountry[position]);
@@ -361,7 +361,7 @@ public void getCity(String id)
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             if(scity[position].equals("city"))
                             {
-                                Toast.makeText(getBaseContext(),"selectstate",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getBaseContext(),"selectstate",Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -408,7 +408,7 @@ public void sendRegisteredData()
     String streettext = streetprofile.getText().toString();
     String pincode = pincodeprofile.getText().toString();
     String doorno=doornoprofile.getText().toString();
-     Toast.makeText(getBaseContext(),streettext+ids[0]+ids[1]+userid,Toast.LENGTH_LONG).show();
+     //Toast.makeText(getBaseContext(),streettext+ids[0]+ids[1]+userid,Toast.LENGTH_LONG).show();
     Log.e("val",streettext+ids[0]+ids[1]+userid);
     String url = "http://www.sukes.in/app-locaton/"+userid+"/"+doorno+"/"+streettext+"/"+ids[0]+"/"+ids[1]+"/"+ids[2]+"/"+pincode;
     //signup networking code
@@ -444,7 +444,7 @@ public void sendRegisteredData()
                     // On complete call either onSignupSuccess or onSignupFailed
                     // depending on success
                     if(statusprofile.equals("true")){
-                       Toast.makeText(getBaseContext(),"hello",Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getBaseContext(),"sucessfull",Toast.LENGTH_SHORT).show();
                     }
                     else {
 

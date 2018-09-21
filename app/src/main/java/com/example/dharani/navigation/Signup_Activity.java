@@ -34,7 +34,7 @@ public class Signup_Activity extends AppCompatActivity {
     AppCompatButton signupButton,buttonConfirm;
     EditText phoneText,editTextConfirmOtp;
 
-    String status;
+   // String status;
     String username;
     String password;
     String referral;
@@ -45,6 +45,12 @@ public class Signup_Activity extends AppCompatActivity {
     String otp_status;
     int otp_regcheck;
     String otp_userid;
+
+
+   String  status;
+    String userid;
+    String refCode;
+   String paystatus;
 
 
     @Override
@@ -128,7 +134,8 @@ public class Signup_Activity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("error","connection error in networking "+error);
-
+                         Toast.makeText(getBaseContext(),"NO CONNECTION",Toast.LENGTH_SHORT).show();
+                         status="false";
                     }
                 });
 
@@ -155,18 +162,21 @@ public class Signup_Activity extends AppCompatActivity {
     public void onSignupSuccess() {
         signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Toast.makeText(this,"signup was sucessfull",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"please Login",Toast.LENGTH_LONG).show();
         //confirmOtp();
-        SaveSharedPreference obj = new SaveSharedPreference();
-        obj.setPrefStatus(this,status,"","","");
+        //SaveSharedPreference obj = new SaveSharedPreference();
+        //obj.setPrefStatus(this,status,user_id,refCode,paystatus);
+
         this.finish();
         System.gc();
-        Intent home = new Intent(this,MainActivity.class);
+        Intent home = new Intent(this,Login_Activity.class);
         startActivity(home);
     }
 
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Signup failed", Toast.LENGTH_LONG).show();
-
+        //Toast.makeText(getBaseContext(), "Signup failed", Toast.LENGTH_LONG).show();
         signupButton.setEnabled(true);
     }
 
@@ -282,7 +292,7 @@ public class Signup_Activity extends AppCompatActivity {
                             public void run() {
                                 // On complete call either onLoginSuccess or onLoginFailed
                                 if(otp_regcheck == 1){ //|| status_Pref.equals("true"))
-
+                                 //  getUserData();
                                     onSignupSuccess();
                                 }else
                                 {
@@ -343,5 +353,68 @@ public class Signup_Activity extends AppCompatActivity {
 //                requestQueue.add(stringRequest);
 //            }
 //        });
+  /* public void getUserData()
+    {
+
+
+        email = emailText.getText().toString();
+        Log.d("email:","is:"+email);
+        password = passwordText.getText().toString();
+        Log.d("password:","is:"+password);
+
+        String url = "http://www.sukes.in/applogin/"+email+"/"+password;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("loggedInId");
+                            status = obj.getString("result");
+                            userid=obj.getString("userId");
+                            refCode=obj.getString("refCode");
+                            paystatus=obj.getString("paystatus");
+                            Toast.makeText(getBaseContext(), refCode, Toast.LENGTH_LONG).show();
+
+                            Log.d("status is:",""+status);
+                            Log.d("status is:",""+refCode );
+                        }catch(Exception e){
+                            Log.e("json parse error:","exception:"+e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error","connection error in networking "+error);
+                        Toast.makeText(getBaseContext(),"NO CONNECTION",Toast.LENGTH_LONG).show();
+                        status="false";
+                        //  Intent intent=new Intent(Login_Activity.this,Login_Activity.class);
+                        // startActivity(intent);
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+
+                        // On complete call either onLoginSuccess or onLoginFailed
+                        if(status.equals("true")){
+                           // onSignupSuccess();
+                        }
+                        else {
+
+                        }
+
+                    }
+                }, 3000);
+    }*/
+
 }
+
 

@@ -48,4 +48,10 @@ public class SaveSharedPreference {
     {
         return getSharedPreferences(ctx).getString(PREF_PAYSTATUS, "");
     }
+    public static  void setPrefPaystatus(Context ctx,String paystatus){
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(PREF_STATUS,paystatus);
+        editor.apply();
+    }
+
 }
